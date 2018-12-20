@@ -7,6 +7,12 @@ export default function renderChart(props) {
   return `
     document.getElementById('main').style.height = "${height}";
     document.getElementById('main').style.width = "${width}";
+    if(${props.option.areaValue}!=null){
+      if(${props.option.codeType}=='province')
+        echarts.registerMap('map_data', ${JSON.stringify(province[props.option.areaValue])});
+      else
+        echarts.registerMap('map_data', ${JSON.stringify(city['c' + props.option.areaValue])});
+    }
     var myChart = echarts.init(document.getElementById('main'));
     myChart.setOption(${toString(props.option)});
     window.document.addEventListener('message', function(e) {
