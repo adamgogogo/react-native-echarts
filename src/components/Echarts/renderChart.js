@@ -1,5 +1,7 @@
 import echarts from './echarts.min';
 import toString from '../../util/toString';
+import province from './map_data/province';
+import city from './map_data/city';
 
 export default function renderChart(props) {
   const height = `${props.height || 400}px`;
@@ -7,8 +9,8 @@ export default function renderChart(props) {
   return `
     document.getElementById('main').style.height = "${height}";
     document.getElementById('main').style.width = "${width}";
-    if(${props.option.areaValue}!=null){
-      if(${props.option.codeType}=='province')
+    if(${props.option && props.option.areaValue != null}){
+      if(${props.option.codeType == 'province'})
         echarts.registerMap('map_data', ${JSON.stringify(province[props.option.areaValue])});
       else
         echarts.registerMap('map_data', ${JSON.stringify(city['c' + props.option.areaValue])});
